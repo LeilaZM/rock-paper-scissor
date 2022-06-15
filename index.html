@@ -23,17 +23,38 @@
         }
 
         // turn compOutcome into computerSelection
-        let computerSelection = computerPlay();
+        // let computerSelection = computerPlay();
+        
         
         // STEP 2 - single round of Rock, Paper, Scissor
         // declare a variable which is the playerSelection
         // create way to let user type out their option
-        let initialPlayerSelection = prompt("Type in your Weapon of Choice");
+       
         // allow the input to be case-insensitive (run it through toLowerCase?)
-        let playerSelection = initialPlayerSelection.toLowerCase()
+        
         // save this option as the playerSelection
+      
+
+        // define rules of the game - possible comparisons and outcomes 
+        // (indicate if user Win or Lose) and check which case is a match
+        // if player === computer --> message: "It's a tie"
+        // if player = rock && computer = paper --> "You Lose! Paper beats Rock"
+        // if player = rock && computer = scissors --> "You Win! Rock beats Scissors"
+        // if player = paper && computer = rock --> You Win! Paper beats Rock
+         // if player = paper && computer = scissors --> You Lose! Scissor beats Paper
+        // if player = scissors && computer = rock --> You Lose! Rock beats Scissors.
+        // if player = scissors && computer = paper --> You Win! Scissor beats Paper.
+        // create function that brings computerSelection and playerSelection together
+        // return result inside string "You (winlose)! (Display winning rule)"
+
         function playRound() {
-           
+
+          // let initialPlayerSelection = prompt("Type in your Weapon of Choice");
+          let playerSelection = prompt("Type in your Weapon of Choice").toLowerCase();
+          let computerSelection = computerPlay();
+
+          console.log("You chose " + playerSelection +". The computer chose " + computerSelection);
+          
             // Tie Case
            if (playerSelection === computerSelection) {
                 return "It's a Tie!";
@@ -51,7 +72,7 @@
            // Paper Case
 
            if (playerSelection === "paper" && computerSelection === "rock") {
-                return "You Win! Paper beats Scissors"
+                return "You Win! Paper beats Rock "
            }
 
            if (playerSelection === "paper" && computerSelection === "scissors") {
@@ -69,19 +90,59 @@
            }
         }
 
-        // define rules of the game - possible comparisons and outcomes 
-        // (indicate if user Win or Lose) and check which case is a match
-        // if player === computer --> message: "It's a tie"
-        // if player = rock && computer = paper --> "You Lose! Paper beats Rock"
-        // if player = rock && computer = scissors --> "You Win! Rock beats Scissors"
-        // if player = paper && computer = rock --> You Win! Paper beats Rock
-         // if player = paper && computer = scissors --> You Lose! Scissor beats Paper
-        // if player = scissors && computer = rock --> You Lose! Rock beats Scissors.
-        // if player = scissors && computer = paper --> You Win! Scissor beats Paper.
-        // create function that brings computerSelection and playerSelection together
-        // return result inside string "You (winlose)! (Display winning rule)"
 
+        function getScore(roundOutcome) {
+          let lowercaseOutcome = roundOutcome.toLowerCase()
+          if (lowercaseOutcome.includes('win')) {
+               return "playerWin"
+          }
+          else if (lowercaseOutcome.includes("lose")) {
+               return "computerWin"
+          }
+               else {
+                    return "draw"
+               }
+               
+        }
+        // Create a new function called game()
+        // Call the playRound function inside game()
+        // repeat the playRound function 5 times while keeping track of win, lose and draw
+        // 
+        // report a winner at and of round 5
+        function game() {
+          let playerScore = 0;
+          let computerScore = 0;
+          for (let i=0;i<5;i++) {
+               // take result of round and increment score using playerWin, computerWin or draw
+               let roundOutcome = playRound();
+               let score = getScore(roundOutcome)
+               if (score === "playerWin") {
+                    playerScore++;
+               }
+               else if (score === "computerWin") {
+                    computerScore++;
+               }
+                    
+               console.log(roundOutcome);
+         
+            }
+          // take scores, compute result and return message based on result
+          if (playerScore > computerScore) {
+               return "You win!"
+          }
+          else if (playerScore < computerScore) {
+               return "You Lose!"
+          }
+          else if (playerScore === computerScore) {
+                return "It's a Tie!"
+          }
+     //}
+          }
+          
+          
 
+           
+        
         </script>
     
 </body>
